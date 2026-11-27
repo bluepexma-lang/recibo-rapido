@@ -1,0 +1,50 @@
+* { box-sizing: border-box; }
+:root { --cor: #1f5f8b; --fundo: #f3f5f7; --borda: #cfd6dd; --texto: #1b1f24; }
+body { margin: 0; font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; background: var(--fundo); color: var(--texto); font-size: 17px; }
+.topo { background: var(--cor); color: #fff; padding: calc(12px + env(safe-area-inset-top)) 16px 12px; }
+.topo h1 { margin: 0; font-size: 20px; }
+.abas { display: flex; background: #fff; border-bottom: 1px solid var(--borda); position: sticky; top: 0; z-index: 5; }
+.abas button { flex: 1; border: 0; background: none; padding: 14px 4px; font-size: 15px; color: #555; border-bottom: 3px solid transparent; }
+.abas button.ativa { color: var(--cor); border-bottom-color: var(--cor); font-weight: 600; }
+main { max-width: 640px; margin: 0 auto; padding: 16px 16px 40px; }
+.aba { display: none; }
+.aba.ativa { display: block; }
+label { display: block; margin-bottom: 14px; font-size: 14px; font-weight: 600; color: #444; }
+input, textarea, select { display: block; width: 100%; margin-top: 6px; padding: 12px; font: inherit; font-weight: 400; border: 1px solid var(--borda); border-radius: 8px; background: #fff; color: var(--texto); }
+input:focus, textarea:focus, select:focus { outline: 2px solid var(--cor); border-color: transparent; }
+.linha2 { display: flex; gap: 12px; }
+.linha2 label { flex: 1; }
+fieldset { border: 1px solid var(--borda); border-radius: 10px; margin: 0 0 16px; padding: 12px; background: #fff; }
+legend { font-weight: 600; padding: 0 6px; }
+button, .botao { display: inline-block; font: inherit; font-weight: 600; padding: 12px 16px; border-radius: 8px; border: 0; cursor: pointer; text-align: center; margin: 0; }
+.principal { background: var(--cor); color: #fff; width: 100%; padding: 15px; font-size: 17px; }
+.sec { background: #e3e9ef; color: var(--texto); }
+.botao { background: var(--cor); color: #fff; }
+.botao.sec { background: #e3e9ef; color: var(--texto); }
+.botoes { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 10px; }
+.botoes > * { flex: 1; }
+.num { margin: 0 0 12px; color: #555; }
+.extenso { margin: -8px 0 14px; font-size: 14px; color: var(--cor); min-height: 1em; }
+.aviso { background: #fff4d6; border: 1px solid #f0d58a; padding: 12px; border-radius: 8px; margin-bottom: 16px; }
+.dica { margin: 0 0 8px; font-size: 14px; color: #666; }
+.assin { width: 100%; height: 180px; border: 1px dashed #999; border-radius: 8px; background: #fff; touch-action: none; display: block; }
+.logo-prev { max-width: 200px; max-height: 120px; display: block; margin-bottom: 6px; }
+.miniaturas { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin: -4px 0 16px; }
+.miniaturas div { position: relative; }
+.miniaturas img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 6px; display: block; }
+.miniaturas button { position: absolute; top: 2px; right: 2px; padding: 2px 8px; background: rgba(0,0,0,.65); color: #fff; font-size: 14px; }
+.lista { list-style: none; margin: 12px 0 0; padding: 0; }
+.lista li { background: #fff; border: 1px solid var(--borda); border-radius: 10px; padding: 12px; margin-bottom: 10px; display: flex; gap: 10px; align-items: center; }
+.lista .info { flex: 1; min-width: 0; }
+.lista .info b { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.lista .info small { color: #666; }
+.lista button { padding: 10px 12px; font-size: 14px; }
+.vazio { color: #777; text-align: center; margin-top: 30px; }
+.modal { position: fixed; inset: 0; background: rgba(0,0,0,.6); z-index: 20; display: flex; }
+.modal[hidden] { display: none; }
+.modal-caixa { background: var(--fundo); margin: auto; width: 100%; max-width: 640px; height: 100%; display: flex; flex-direction: column; }
+.modal-topo { display: flex; justify-content: space-between; align-items: center; padding: calc(10px + env(safe-area-inset-top)) 16px 10px; background: #fff; border-bottom: 1px solid var(--borda); }
+.paginas { flex: 1; overflow: auto; padding: 16px; }
+.paginas img { width: 100%; display: block; margin-bottom: 12px; box-shadow: 0 1px 6px rgba(0,0,0,.25); background: #fff; }
+.fixo { padding: 12px 16px calc(12px + env(safe-area-inset-bottom)); background: #fff; border-top: 1px solid var(--borda); margin: 0; }
+.toast { position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%); background: #222; color: #fff; padding: 12px 18px; border-radius: 8px; z-index: 30; max-width: 90%; }

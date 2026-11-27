@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#1f5f8b">
+  <title>Recibo Rápido</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icon-192.png">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topo">
+    <h1>Recibo Rápido</h1>
+  </header>
+
+  <nav class="abas">
+    <button data-aba="novo" class="ativa">Novo recibo</button>
+    <button data-aba="historico">Histórico</button>
+    <button data-aba="dados">Meus dados</button>
+  </nav>
+
+  <main>
+    <!-- NOVO RECIBO -->
+    <section id="aba-novo" class="aba ativa">
+      <div id="aviso-dados" class="aviso" hidden>
+        Antes do primeiro recibo, preencha <b>Meus dados</b> (nome e assinatura).
+      </div>
+      <form id="form-recibo" autocomplete="off">
+        <p class="num">Recibo nº <b id="prox-num">0001</b></p>
+        <label>Cliente *<input name="cliNome" required placeholder="Nome de quem pagou"></label>
+        <label>CPF/CNPJ do cliente<input name="cliDoc" inputmode="numeric" placeholder="opcional"></label>
+        <label>Serviço executado *<textarea name="servico" rows="3" required placeholder="Ex.: Troca de 3 tomadas e instalação de chuveiro"></textarea></label>
+        <label>Valor (R$) *<input name="valor" inputmode="decimal" required placeholder="150,00"></label>
+        <p class="extenso" id="extenso"></p>
+        <label>Forma de pagamento
+          <select name="pagamento">
+            <option>Pix</option><option>Dinheiro</option><option>Cartão de débito</option>
+            <option>Cartão de crédito</option><option>Transferência</option><option>Boleto</option><option value="">(não informar)</option>
+          </select>
+        </label>
+        <div class="linha2">
+          <label>Data<input name="data" type="date" required></label>
+          <label>Cidade<input name="cidade" placeholder="Cidade/UF"></label>
+        </div>
+        <label>Fotos do serviço
+          <input id="in-fotos" type="file" accept="image/*" multiple>
+        </label>
+        <div id="fotos" class="miniaturas"></div>
+        <button type="submit" class="principal">Gerar recibo</button>
+      </form>
+    </section>
+
+    <!-- HISTÓRICO -->
+    <section id="aba-historico" class="aba">
+      <input id="busca" type="search" placeholder="Buscar por cliente ou número">
+      <ul id="lista" class="lista"></ul>
+      <p id="vazio" class="vazio">Nenhum recibo emitido ainda.</p>
+    </section>
+
+    <!-- MEUS DADOS -->
+    <section id="aba-dados" class="aba">
+      <form id="form-dados" autocomplete="on">
+        <label>Seu nome ou empresa *<input name="nome" required></label>
+        <label>CPF/CNPJ<input name="documento" inputmode="numeric"></label>
+        <label>Telefone<input name="telefone" type="tel"></label>
+        <label>Endereço<input name="endereco"></label>
+        <label>Cidade padrão<input name="cidade" placeholder="Ex.: São Luís/MA"></label>
+        <label>Próximo número de recibo<input name="proximoNumero" type="number" min="1" step="1"></label>
+
+        <fieldset>
+          <legend>Logo</legend>
+          <img id="logo-prev" class="logo-prev" alt="" hidden>
+          <div class="botoes">
+            <label class="botao">Escolher logo<input id="in-logo" type="file" accept="image/*" hidden></label>
+            <button type="button" id="tirar-logo" class="sec">Remover</button>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Sua assinatura *</legend>
+          <p class="dica">Assine com o dedo no quadro abaixo.</p>
+          <canvas id="assin" class="assin"></canvas>
+          <div class="botoes">
+            <button type="button" id="limpar-assin" class="sec">Limpar</button>
+          </div>
+        </fieldset>
+
+        <button type="submit" class="principal">Salvar meus dados</button>
+      </form>
+
+      <fieldset>
+        <legend>Cópia de segurança</legend>
+        <p class="dica">Os recibos ficam só neste aparelho. Faça uma cópia de vez em quando, pra não perder se trocar de celular.</p>
+        <div class="botoes">
+          <button type="button" id="exportar" class="sec">Exportar cópia</button>
+          <label class="botao sec">Importar cópia<input id="importar" type="file" accept="application/json,.json" hidden></label>
+        </div>
+      </fieldset>
+    </section>
+  </main>
+
+  <!-- PRÉVIA -->
+  <div id="previa" class="modal" hidden>
+    <div class="modal-caixa">
+      <div class="modal-topo">
+        <b id="previa-titulo">Recibo</b>
+        <button id="fechar" class="sec">Fechar</button>
+      </div>
+      <div id="previa-paginas" class="paginas"></div>
+      <div class="botoes fixo">
+        <button id="compartilhar" class="principal">Enviar (WhatsApp, e-mail…)</button>
+        <button id="baixar" class="sec">Baixar PDF</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast" hidden></div>
+
+  <script src="extenso.js"></script>
+  <script src="pdf.js"></script>
+  <script src="recibo.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
