@@ -1,4 +1,4 @@
-// Recibo Rápido: telas, dados no aparelho (localStorage + IndexedDB), assinatura e envio.
+// iAris Gerador de Recibos: telas, dados no aparelho (localStorage + IndexedDB), assinatura e envio.
 (function () {
   const $ = (s) => document.querySelector(s);
   const CHAVE_PERFIL = 'recibo-rapido:perfil';
@@ -361,7 +361,7 @@
       gravarPerfil(perfil);
       preencherDados(); prepararAssinatura();
       toast('Cópia importada.');
-    } catch { toast('Esse arquivo não é uma cópia válida do Recibo Rápido.'); }
+    } catch { toast('Esse arquivo não é uma cópia válida do iAris Gerador de Recibos.'); }
   });
 
   // ---------- Início ----------

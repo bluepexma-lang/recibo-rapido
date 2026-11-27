@@ -1,6 +1,6 @@
 {
-  "name": "Recibo Rápido",
-  "short_name": "Recibos",
+  "name": "iAris Gerador de Recibos",
+  "short_name": "iAris Recibos",
   "description": "Emita recibos assinados na hora, direto do celular.",
   "lang": "pt-BR",
   "start_url": "./index.html",

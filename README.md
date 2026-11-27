@@ -1,4 +1,4 @@
-# Recibo Rápido
+# iAris Gerador de Recibos
 
 **O que é:** app web instalável (PWA) pra emitir recibo assinado no celular, logo depois de terminar o serviço.
 **Pra quem:** prestador de serviço (eletricista, encanador, técnico, diarista etc.).
