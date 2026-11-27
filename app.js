@@ -95,6 +95,7 @@
   const canvasAssin = $('#assin');
   const ctxAssin = canvasAssin.getContext('2d');
   let assinRabiscada = false, desenhando = false;
+  let assinFoto = null; // assinatura limpa vinda da câmera (PNG), gravada ao salvar
 
   function prepararAssinatura() {
     const dpr = window.devicePixelRatio || 1;
@@ -104,7 +105,7 @@
     ctxAssin.lineWidth = 2.6 * dpr;
     ctxAssin.lineCap = 'round'; ctxAssin.lineJoin = 'round';
     ctxAssin.strokeStyle = '#0b1f66';
-    assinRabiscada = false;
+    assinRabiscada = false; assinFoto = null;
     if (perfil.assinatura) {
       const img = new Image();
       img.onload = () => {
@@ -121,7 +122,8 @@
     return [(e.clientX - rect.left) * dpr, (e.clientY - rect.top) * dpr];
   }
   canvasAssin.addEventListener('pointerdown', (e) => {
-    if (!assinRabiscada) ctxAssin.clearRect(0, 0, canvasAssin.width, canvasAssin.height); // assinatura nova substitui a antiga
+    if (!assinRabiscada || assinFoto) ctxAssin.clearRect(0, 0, canvasAssin.width, canvasAssin.height); // assinatura nova substitui a antiga
+    assinFoto = null;
     desenhando = true; assinRabiscada = true;
     canvasAssin.setPointerCapture(e.pointerId);
     const [x, y] = ponto(e);
@@ -135,8 +137,23 @@
   ['pointerup', 'pointercancel', 'pointerleave'].forEach((ev) => canvasAssin.addEventListener(ev, () => (desenhando = false)));
   $('#limpar-assin').addEventListener('click', () => {
     ctxAssin.clearRect(0, 0, canvasAssin.width, canvasAssin.height);
-    assinRabiscada = true; // marca como "apagada": ao salvar, fica sem assinatura
+    assinRabiscada = true; assinFoto = null; // marca como "apagada": ao salvar, fica sem assinatura
   });
+
+  // assinatura fotografada: mostra no quadro e guarda a versão limpa em tamanho cheio
+  AssinaturaFoto.aoUsar = (url) => {
+    const img = new Image();
+    img.onload = () => {
+      ctxAssin.clearRect(0, 0, canvasAssin.width, canvasAssin.height);
+      const r = Math.min(canvasAssin.width * 0.9 / img.width, canvasAssin.height * 0.9 / img.height);
+      const l = img.width * r, a = img.height * r;
+      ctxAssin.drawImage(img, (canvasAssin.width - l) / 2, (canvasAssin.height - a) / 2, l, a);
+      assinRabiscada = true; assinFoto = url;
+      toast('Assinatura pronta. Toque em "Salvar meus dados" pra gravar.');
+    };
+    img.src = url;
+  };
+  AssinaturaFoto.iniciar();
 
   // recorta o espaço vazio em volta da assinatura
   function assinaturaRecortada() {
@@ -188,12 +205,12 @@
       nome: f.nome.value.trim(), documento: f.documento.value.trim(), telefone: f.telefone.value.trim(),
       endereco: f.endereco.value.trim(), cidade: f.cidade.value.trim(),
       proximoNumero: Math.max(1, parseInt(f.proximoNumero.value, 10) || 1),
-      logo: logoTemp, assinatura: assinRabiscada ? assinaturaRecortada() : perfil.assinatura,
+      logo: logoTemp, assinatura: assinFoto || (assinRabiscada ? assinaturaRecortada() : perfil.assinatura),
     };
     if (!novo.assinatura) { toast('Faltou a assinatura.'); return; }
     perfil = novo;
     try { gravarPerfil(perfil); } catch { toast('Sem espaço no aparelho. Tente uma logo menor.'); return; }
-    assinRabiscada = false;
+    assinRabiscada = false; assinFoto = null;
     toast('Dados salvos.');
     abrirAba('novo');
   });

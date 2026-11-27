@@ -4,7 +4,8 @@
 **Pra quem:** prestador de serviço (eletricista, encanador, técnico, diarista etc.).
 
 ## O que faz
-- Cadastro do prestador uma vez só: nome, CPF/CNPJ, telefone, endereço, cidade, **logo** e **assinatura com o dedo**.
+- Cadastro do prestador uma vez só: nome, CPF/CNPJ, telefone, endereço, cidade, **logo** e **assinatura com o dedo**
+  ou **fotografada do papel**: recorte manual, fundo limpo automático (transparente), traço azul, ajuste de intensidade.
 - Recibo com **numeração automática** (0001, 0002…), **valor por extenso**, forma de pagamento, data e cidade.
 - **Fotos do serviço** (até 12), que vão em páginas anexas do PDF, 4 por página.
 - Gera **PDF A4** e envia por WhatsApp, e-mail etc. pelo menu de compartilhar do celular, ou baixa o arquivo.
@@ -33,6 +34,7 @@ No celular: abrir o link no Chrome, menu **⋮**, **Adicionar à tela inicial**.
 | `recibo.js` | desenho do recibo e das páginas de fotos |
 | `pdf.js` | monta o PDF (sem biblioteca externa) |
 | `extenso.js` | valor por extenso |
+| `assinatura-foto.js` | assinatura pela câmera: recorte e limpeza do fundo |
 | `sw.js`, `manifest.json`, `icon-*.png` | instalação e funcionamento offline |
 
 **Ao alterar qualquer arquivo**, aumente `VERSAO` em `sw.js`, senão os celulares continuam com a versão antiga.

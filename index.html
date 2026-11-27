@@ -80,11 +80,13 @@
 
         <fieldset>
           <legend>Sua assinatura *</legend>
-          <p class="dica">Assine com o dedo no quadro abaixo.</p>
+          <p class="dica">Assine com o dedo no quadro abaixo ou fotografe sua assinatura feita no papel.</p>
           <canvas id="assin" class="assin"></canvas>
           <div class="botoes">
+            <button type="button" id="btn-foto-assin" class="sec">📷 Fotografar assinatura</button>
             <button type="button" id="limpar-assin" class="sec">Limpar</button>
           </div>
+          <input id="in-foto-assin" type="file" accept="image/*" capture="environment" hidden>
         </fieldset>
 
         <button type="submit" class="principal">Salvar meus dados</button>
@@ -116,11 +118,43 @@
     </div>
   </div>
 
+  <!-- ASSINATURA PELA CÂMERA -->
+  <div id="foto-assin" class="modal" hidden>
+    <div class="modal-caixa">
+      <div class="modal-topo">
+        <b id="fa-titulo"></b>
+        <button id="fa-cancelar" class="sec">Cancelar</button>
+      </div>
+      <div class="paginas">
+        <div id="fa-recorte">
+          <p class="dica">Arraste os cantos brancos pra deixar só a assinatura dentro do quadro. Arraste o meio pra mover.</p>
+          <div class="fa-area"><canvas id="fa-canvas"></canvas></div>
+        </div>
+        <div id="fa-ajuste" hidden>
+          <div class="fa-xadrez"><img id="fa-previa" alt="Assinatura limpa"></div>
+          <p id="fa-vazio" class="aviso" hidden>Não achei traço. Aumente a intensidade ou volte e ajuste o quadro.</p>
+          <label>Intensidade
+            <input id="fa-intens" type="range" min="0" max="100" value="50">
+          </label>
+          <p class="dica">Traço falhado: aumente. Sobrou sujeira ou sombra: diminua.</p>
+        </div>
+      </div>
+      <div class="botoes fixo">
+        <button id="fa-proximo" class="principal">Próximo</button>
+      </div>
+      <div class="botoes fixo" id="fa-botoes-ajuste" hidden>
+        <button id="fa-voltar" class="sec">Voltar</button>
+        <button id="fa-usar" class="principal">Usar esta assinatura</button>
+      </div>
+    </div>
+  </div>
+
   <div id="toast" class="toast" hidden></div>
 
   <script src="extenso.js"></script>
   <script src="pdf.js"></script>
   <script src="recibo.js"></script>
+  <script src="assinatura-foto.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
