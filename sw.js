@@ -1,8 +1,8 @@
 // Guarda os arquivos do app no aparelho para funcionar sem internet.
 // Ao mudar qualquer arquivo do app, aumente a VERSAO para os aparelhos baixarem a nova.
-const VERSAO = 'recibo-rapido-v2';
+const VERSAO = 'recibo-rapido-v3';
 const ARQUIVOS = ['./', 'index.html', 'style.css', 'app.js', 'recibo.js', 'pdf.js', 'extenso.js', 'assinatura-foto.js',
-  'manifest.json', 'icon-192.png', 'icon-512.png'];
+  'manifest.json', 'icon-192.png', 'icon-512.png', 'icon-maskable-512.png', 'apple-touch-icon.png'];
 
 self.addEventListener('install', (e) => {
   e.waitUntil(caches.open(VERSAO).then((c) => c.addAll(ARQUIVOS)).then(() => self.skipWaiting()));
